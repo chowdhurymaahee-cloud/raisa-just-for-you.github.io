@@ -7,7 +7,7 @@
   <!-- Google Fonts: Great Vibes + Dancing Script + Noto Sans Bengali -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@400;700&family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@400;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <style>
@@ -23,7 +23,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: 'Noto Sans Bengali', 'Segoe UI', sans-serif;
+      font-family: 'Segoe UI', 'Noto Sans Bengali', sans-serif;
       padding: 20px;
       margin: 0;
       position: relative;
@@ -126,7 +126,7 @@
       transform: scale(1.03) rotate(0.5deg);
     }
 
-    /* poem box – editable & with poet name */
+    /* poem box – clean, non-editable */
     .poem-box {
       background: rgba(255, 235, 240, 0.7);
       backdrop-filter: blur(4px);
@@ -158,18 +158,22 @@
       font-family: 'Noto Sans Bengali', sans-serif;
       white-space: pre-line;
       word-break: break-word;
+      cursor: default;
+      user-select: none;
     }
 
     .poem-box .poet-name {
       display: block;
       margin-top: 10px;
-      font-family: 'Great Vibes', cursive;
+      font-family: 'Segoe UI', 'Noto Sans Bengali', sans-serif;
       font-size: 1.8rem;
       color: #a13252;
       text-shadow: 0 2px 8px #fbaec8;
       letter-spacing: 1px;
       border-top: 2px dashed #ff9bb3;
       padding-top: 6px;
+      cursor: default;
+      user-select: none;
     }
 
     .poem-box .poet-name i {
@@ -205,7 +209,7 @@
       gap: 16px;
       letter-spacing: 1px;
       border: 1px solid #ffb3cb;
-      font-family: 'Dancing Script', cursive;
+      font-family: 'Segoe UI', 'Noto Sans Bengali', sans-serif;
     }
 
     .btn-next i {
@@ -239,10 +243,11 @@
       border: 1px solid #ffb7cd;
       font-weight: 500;
       letter-spacing: 0.5px;
-      font-family: 'Dancing Script', cursive;
+      font-family: 'Segoe UI', 'Noto Sans Bengali', sans-serif;
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      user-select: none;
     }
 
     .footer i {
@@ -282,11 +287,12 @@
     }
 
     .popup-card h2 {
-      font-family: 'Great Vibes', cursive;
+      font-family: 'Segoe UI', 'Noto Sans Bengali', sans-serif;
       font-size: 3.2rem;
       color: #a13252;
       margin-bottom: 0.2rem;
       text-shadow: 0 4px 20px #fbaec8;
+      user-select: none;
     }
 
     .popup-card .popup-msg {
@@ -299,7 +305,36 @@
       border: 1px solid #ffb0c7;
       color: #3d1f2b;
       font-weight: 500;
-      font-family: 'Noto Sans Bengali', sans-serif;
+      font-family: 'Segoe UI', 'Noto Sans Bengali', sans-serif;
+      cursor: default;
+      user-select: none;
+    }
+
+    /* Notice message - always visible above the button */
+    .popup-notice {
+      font-size: 0.95rem;
+      color: #a13252;
+      font-family: 'Segoe UI', 'Noto Sans Bengali', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 8px 0 10px 0;
+      margin-bottom: 2px;
+      display: block;
+      width: 100%;
+    }
+
+    .popup-notice i {
+      color: #d44a6a;
+      margin: 0 6px;
+    }
+
+    .popup-notice .notice-divider {
+      display: inline-block;
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(to right, transparent, #ff9bb3, transparent);
+      margin: 0 8px;
+      vertical-align: middle;
     }
 
     .popup-card .popup-close {
@@ -313,8 +348,11 @@
       box-shadow: 0 6px 0 #8f3350;
       cursor: pointer;
       transition: 0.1s;
-      margin-top: 12px;
-      font-family: 'Dancing Script', cursive;
+      margin-top: 4px;
+      font-family: 'Segoe UI', 'Noto Sans Bengali', sans-serif;
+      position: relative;
+      width: 100%;
+      max-width: 280px;
     }
 
     .popup-card .popup-close:active {
@@ -396,6 +434,8 @@
       .photo-frame { max-width: 280px; }
       .popup-card { padding: 1.8rem; }
       .popup-card .popup-msg { font-size: 1.2rem; }
+      .popup-notice { font-size: 0.8rem; }
+      .popup-notice .notice-divider { width: 20px; }
     }
   </style>
 </head>
@@ -419,7 +459,7 @@
     <div class="page active" data-page="1">
       <div class="photo-frame"><img src="Golap Niye dariye ache.jpg" alt="Golap Niye Dariye Ache"></div>
       <div class="poem-box">
-        <div class="poem-text" contenteditable="true">প্রেমের ভাষা সুবাস তাহার, নয়ন জুড়ায় বিশ্ব-ভুবন।<br>একটি গোলাপ দিলেই হাতে, রঙিন ওঠে হাজারো মন।</div>
+        <div class="poem-text">প্রেমের ভাষা সুবাস তাহার, নয়ন জুড়ায় বিশ্ব-ভুবন।<br>একটি গোলাপ দিলেই হাতে, রঙিন ওঠে হাজারো মন।</div>
         <span class="poet-name"><i class="fas fa-feather-alt"></i> — কবি কাজী নজরুল ইসলাম</span>
       </div>
       <div class="bottom-area">
@@ -432,7 +472,7 @@
     <div class="page" data-page="2">
       <div class="photo-frame"><img src="Shari pore noukay.jpeg" alt="Shari Pore Noukay"></div>
       <div class="poem-box">
-        <div class="poem-text" contenteditable="true">তুমি এলোকেশে যখন অলিন্দে বসো, কোন্ কারণে মিটি মিটি হাসো<br>সেই হাসিতে মম হৃদয় নাশো ওহে হৃদয় রানী—মম নয়ন হেরে সদা তোমারে ওহে সুকেশিনী।</div>
+        <div class="poem-text">তুমি এলোকেশে যখন অলিন্দে বসো, কোন্ কারণে মিটি মিটি হাসো<br>সেই হাসিতে মম হৃদয় নাশো ওহে হৃদয় রানী—মম নয়ন হেরে সদা তোমারে ওহে সুকেশিনী।</div>
         <span class="poet-name"><i class="fas fa-feather-alt"></i> — কবি দেলওয়ার হোসেন শিকদার</span>
       </div>
       <div class="bottom-area">
@@ -445,7 +485,7 @@
     <div class="page" data-page="3">
       <div class="photo-frame"><img src="tuki.jpg" alt="Tuki"></div>
       <div class="poem-box">
-        <div class="poem-text" contenteditable="true">তোমার ওই সহজ সরল মুখের পানে চেয়ে, আমার মনের সকল কথা আকুল ওঠে গেয়ে।<br>জগতে কত রূপের মেলা, কত চাতুরী কত ছল, তোমার মাঝে শান্ত সুখে জুড়ায় আঁখির জল।</div>
+        <div class="poem-text">তোমার ওই সহজ সরল মুখের পানে চেয়ে, আমার মনের সকল কথা আকুল ওঠে গেয়ে।<br>জগতে কত রূপের মেলা, কত চাতুরী কত ছল, তোমার মাঝে শান্ত সুখে জুড়ায় আঁখির জল।</div>
         <span class="poet-name"><i class="fas fa-feather-alt"></i> — রবীন্দ্রনাথ ঠাকুর</span>
       </div>
       <div class="bottom-area">
@@ -458,7 +498,7 @@
     <div class="page" data-page="4">
       <div class="photo-frame"><img src="rail line eer majhe.jpg" alt="Rail Line"></div>
       <div class="poem-box">
-        <div class="poem-text" contenteditable="true">তুমি তো জানো না কিছু, তুমি তো বোঝো না<br>আমার এ বুকে লুকিয়ে আছে কতটা প্রেরণা।<br>তুমি শুধু আলো হয়ে থেকো আমার ঘরে,<br>আমি তোমায় ভালোবেসে যাবো আজীবন ধরে।</div>
+        <div class="poem-text">তুমি তো জানো না কিছু, তুমি তো বোঝো না<br>আমার এ বুকে লুকিয়ে আছে কতটা প্রেরণা।<br>তুমি শুধু আলো হয়ে থেকো আমার ঘরে,<br>আমি তোমায় ভালোবেসে যাবো আজীবন ধরে।</div>
         <span class="poet-name"><i class="fas fa-feather-alt"></i> — কবি শক্তি চট্টোপাধ্যায়</span>
       </div>
       <div class="bottom-area">
@@ -471,7 +511,7 @@
     <div class="page" data-page="5">
       <div class="photo-frame"><img src="BOi porche.jpg" alt="Boi Porche"></div>
       <div class="poem-box">
-        <div class="poem-text" contenteditable="true">তুমি যখন বইয়ের পাতায় মগ্ন হয়ে থাকো,<br>চারপাশের এই ব্যস্ত শহর তখন স্তব্ধ হয়ে যায়।<br>আমি বইয়ের পাতা নই, তবু তোমার ওই দু'চোখের<br>মনোযোগ পাওয়ার জন্য বড্ড ব্যাকুল হয়ে উঠি।</div>
+        <div class="poem-text">তুমি যখন বইয়ের পাতায় মগ্ন হয়ে থাকো,<br>চারপাশের এই ব্যস্ত শহর তখন স্তব্ধ হয়ে যায়।<br>আমি বইয়ের পাতা নই, তবু তোমার ওই দু'চোখের<br>মনোযোগ পাওয়ার জন্য বড্ড ব্যাকুল হয়ে উঠি।</div>
         <span class="poet-name"><i class="fas fa-feather-alt"></i> — সুনীল গঙ্গোপাধ্যায়</span>
       </div>
       <div class="bottom-area">
@@ -484,7 +524,7 @@
     <div class="page" data-page="6">
       <div class="photo-frame"><img src="GOLAP FUL.jpeg" alt="Golap Ful"></div>
       <div class="poem-box">
-        <div class="poem-text" contenteditable="true">পাতায় পাতায় লুকিয়ে থাকে গোলাপের সেই ঘ্রাণ,<br>তোমায় দেখলে জুড়িয়ে যায় আমার আকুল প্রাণ।<br>জ্ঞানের আলোয় মগ্ন তুমি, রূপের অনন্য এক মেলা,<br>তোমার এই মায়াতেই কাটুক আমার সারাবেলা।</div>
+        <div class="poem-text">পাতায় পাতায় লুকিয়ে থাকে গোলাপের সেই ঘ্রাণ,<br>তোমায় দেখলে জুড়িয়ে যায় আমার আকুল প্রাণ।<br>জ্ঞানের আলোয় মগ্ন তুমি, রূপের অনন্য এক মেলা,<br>তোমার এই মায়াতেই কাটুক আমার সারাবেলা।</div>
         <span class="poet-name"><i class="fas fa-feather-alt"></i> — কবি শামসুর রহমান</span>
       </div>
       <div class="bottom-area">
@@ -497,7 +537,7 @@
     <div class="page" data-page="7">
       <div class="photo-frame"><img src="Chokh.jpeg" alt="Chokh"></div>
       <div class="poem-box">
-        <div class="poem-text" contenteditable="true">শোনো কাজল চোখের মেয়ে<br>আমার দিবস কাটে, বিবশ হয়ে তোমার চোখে চেয়ে।</div>
+        <div class="poem-text">শোনো কাজল চোখের মেয়ে<br>আমার দিবস কাটে, বিবশ হয়ে তোমার চোখে চেয়ে।</div>
         <span class="poet-name"><i class="fas fa-feather-alt"></i> — সাদাত হোসাইন</span>
       </div>
       <div class="bottom-area">
@@ -520,9 +560,19 @@
       <div class="confetti-container">
         <span></span><span></span><span></span><span></span>
       </div>
-      <h2>💞 ONLY FOR YOU 💞</h2>
-      <div class="popup-msg" id="popupMessage" contenteditable="true">Don't take it serious, take love & respect</div>
-      <button class="popup-close" id="closePopup">💖 I Don't Mind 💖</button>
+      <h2>RAISA FOR YOU</h2>
+      <div class="popup-msg" id="popupMessage">Don't take it serious, take love & respect.</div>
+      
+      <!-- Notice message - always shown above the button -->
+      <div class="popup-notice" id="popupNotice">
+        <i class="fas fa-heart"></i> 
+        <span class="notice-divider"></span>
+        If you don't mind, click to,
+        <span class="notice-divider"></span>
+        <i class="fas fa-heart"></i>
+      </div>
+      
+      <button class="popup-close" id="closePopup">I Don't Mind</button>
     </div>
   </div>
 
@@ -575,7 +625,7 @@
       });
 
       console.log('💖 Raisa Just For You website ready!');
-      console.log('💡 EVERYTHING MADE WITH LOVE (click & type)');
+      console.log('💡 EVERYTHING MADE WITH LOVE');
     })();
   </script>
 </body>
