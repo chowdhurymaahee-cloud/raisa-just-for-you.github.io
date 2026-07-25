@@ -26,17 +26,53 @@
       font-family: 'Noto Sans Bengali', 'Segoe UI', sans-serif;
       padding: 20px;
       margin: 0;
+      position: relative;
+      overflow-x: hidden;
     }
 
-    /* main card container */
+    /* Floating background hearts animation - fills empty space on large screens */
+    .bg-hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bg-hearts i {
+      position: absolute;
+      color: rgba(255, 80, 120, 0.12);
+      font-size: 3rem;
+      animation: bgFloat 20s infinite linear;
+    }
+
+    .bg-hearts i:nth-child(1) { left: 5%; animation-duration: 22s; font-size: 4rem; }
+    .bg-hearts i:nth-child(2) { left: 15%; animation-duration: 18s; font-size: 3.5rem; animation-delay: 2s; }
+    .bg-hearts i:nth-child(3) { left: 25%; animation-duration: 25s; font-size: 5rem; animation-delay: 4s; }
+    .bg-hearts i:nth-child(4) { left: 35%; animation-duration: 20s; font-size: 3rem; animation-delay: 1s; }
+    .bg-hearts i:nth-child(5) { left: 45%; animation-duration: 23s; font-size: 4.5rem; animation-delay: 3s; }
+    .bg-hearts i:nth-child(6) { left: 55%; animation-duration: 19s; font-size: 3.2rem; animation-delay: 5s; }
+    .bg-hearts i:nth-child(7) { left: 65%; animation-duration: 24s; font-size: 4.8rem; animation-delay: 2.5s; }
+    .bg-hearts i:nth-child(8) { left: 75%; animation-duration: 21s; font-size: 3.8rem; animation-delay: 4.5s; }
+    .bg-hearts i:nth-child(9) { left: 85%; animation-duration: 26s; font-size: 4.2rem; animation-delay: 1.5s; }
+    .bg-hearts i:nth-child(10) { left: 92%; animation-duration: 17s; font-size: 3.5rem; animation-delay: 3.5s; }
+
+    @keyframes bgFloat {
+      0% { top: -10%; transform: rotate(0deg) scale(0.8); opacity: 0.1; }
+      10% { opacity: 0.25; }
+      90% { opacity: 0.25; }
+      100% { top: 110%; transform: rotate(720deg) scale(1.2); opacity: 0.05; }
+    }
+
+    /* main card container - elevated above background */
     .page {
       display: none;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: rgba(255, 240, 245, 0.7);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: rgba(255, 240, 245, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       width: 100%;
       max-width: 820px;
       border-radius: 70px 20px 70px 20px;
@@ -45,6 +81,8 @@
       border: 1px solid rgba(255, 210, 225, 0.7);
       transition: 0.2s;
       animation: fadeZoom 0.7s ease forwards;
+      position: relative;
+      z-index: 1;
     }
 
     .page.active {
@@ -362,13 +400,27 @@
   </style>
 </head>
 <body>
+  <!-- Floating background hearts - fills empty space on large screens -->
+  <div class="bg-hearts">
+    <i class="fas fa-heart"></i>
+    <i class="fas fa-heart"></i>
+    <i class="fas fa-heart"></i>
+    <i class="fas fa-heart"></i>
+    <i class="fas fa-heart"></i>
+    <i class="fas fa-heart"></i>
+    <i class="fas fa-heart"></i>
+    <i class="fas fa-heart"></i>
+    <i class="fas fa-heart"></i>
+    <i class="fas fa-heart"></i>
+  </div>
+
   <div id="app">
     <!-- PAGE 1 -->
     <div class="page active" data-page="1">
-      <div class="photo-frame"><img src="Golap Niye dariye ache.jpg"></div>
+      <div class="photo-frame"><img src="Golap Niye dariye ache.jpg" alt="Golap Niye Dariye Ache"></div>
       <div class="poem-box">
-        <div class="poem-text" contenteditable="true"> প্রেমের ভাষা সুবাস তাহার,নয়ন জুড়ায় বিশ্ব-ভুবন। <br> একটি গোলাপ দিলেই হাতে,রঙিন ওঠে হাজারো মন। </div>
-        <span class="poet-name"><i class="fas fa-feather-alt"></i> — কবি কাজী নজরুল ইসলাম </span>
+        <div class="poem-text" contenteditable="true">প্রেমের ভাষা সুবাস তাহার, নয়ন জুড়ায় বিশ্ব-ভুবন।<br>একটি গোলাপ দিলেই হাতে, রঙিন ওঠে হাজারো মন।</div>
+        <span class="poet-name"><i class="fas fa-feather-alt"></i> — কবি কাজী নজরুল ইসলাম</span>
       </div>
       <div class="bottom-area">
         <button class="btn-next" data-next="2">Next <i class="fas fa-arrow-right"></i></button>
@@ -378,10 +430,10 @@
 
     <!-- PAGE 2 -->
     <div class="page" data-page="2">
-      <div class="photo-frame"><img src="Shari pore noukay.jpeg"></div>
+      <div class="photo-frame"><img src="Shari pore noukay.jpeg" alt="Shari Pore Noukay"></div>
       <div class="poem-box">
-        <div class="poem-text" contenteditable="true">প্তুমি এলোকেশে যখন অলিন্দে বসো, কোন্ কারণে মিটি মিটি হাসো<br>সেই হাসিতে মম হৃদয় নাশো ওহে হৃদয় রানি—মম নয়ন হেরে সদা তোমারে ওহে সুকেশিনী।</div>
-        <span class="poet-name"><i class="fas fa-feather-alt"></i> — কবি দেলওয়ার হোসেন শিকদার</span>
+        <div class="poem-text" contenteditable="true">তুমি এলোকেশে যখন অলিন্দে বসো, কোন্ কারণে মিটি মিটি হাসো<br>সেই হাসিতে মম হৃদয় নাশো ওহে হৃদয় রানী—মম নয়ন হেরে সদা তোমারে ওহে সুকেশিনী।</div>
+        <span class="poet-name"><i class="fas fa-feather-alt"></i> — কবি দেলওয়ার হোসেন শিকদার</span>
       </div>
       <div class="bottom-area">
         <button class="btn-next" data-next="3">Next <i class="fas fa-arrow-right"></i></button>
@@ -391,9 +443,9 @@
 
     <!-- PAGE 3 -->
     <div class="page" data-page="3">
-      <div class="photo-frame"><img src="tuki.jpg"></div>
+      <div class="photo-frame"><img src="tuki.jpg" alt="Tuki"></div>
       <div class="poem-box">
-        <div class="poem-text" contenteditable="true">তোমার ওই সহজ সরল মুখের পানে চেয়ে,আমার মনের সকল কথা আকুল ওঠে গেয়ে।<br>জগতে কত রূপের মেলা, কত চাতুরী কত ছল,তোমার মাঝে শান্ত সুখে জুড়ায় আঁখির জল।</div>
+        <div class="poem-text" contenteditable="true">তোমার ওই সহজ সরল মুখের পানে চেয়ে, আমার মনের সকল কথা আকুল ওঠে গেয়ে।<br>জগতে কত রূপের মেলা, কত চাতুরী কত ছল, তোমার মাঝে শান্ত সুখে জুড়ায় আঁখির জল।</div>
         <span class="poet-name"><i class="fas fa-feather-alt"></i> — রবীন্দ্রনাথ ঠাকুর</span>
       </div>
       <div class="bottom-area">
@@ -404,10 +456,10 @@
 
     <!-- PAGE 4 -->
     <div class="page" data-page="4">
-      <div class="photo-frame"><img src="rail line eer majhe.jpg"></div>
+      <div class="photo-frame"><img src="rail line eer majhe.jpg" alt="Rail Line"></div>
       <div class="poem-box">
-        <div class="poem-text" contenteditable="true">চতুমি তো জানো না কিছু, তুমি তো বোঝো নাআমার এ বুকে লুকিয়ে আছে কতটা প্রেরণা।<br>তুমি শুধু আলো হয়ে থেকো আমার ঘরে,আমি তোমায় ভালোবেসে যাবো আজীবন ধরে।</div>
-        <span class="poet-name"><i class="fas fa-feather-alt"></i> — কবি শক্তি চট্টোপাধ্যায়</span>
+        <div class="poem-text" contenteditable="true">তুমি তো জানো না কিছু, তুমি তো বোঝো না<br>আমার এ বুকে লুকিয়ে আছে কতটা প্রেরণা।<br>তুমি শুধু আলো হয়ে থেকো আমার ঘরে,<br>আমি তোমায় ভালোবেসে যাবো আজীবন ধরে।</div>
+        <span class="poet-name"><i class="fas fa-feather-alt"></i> — কবি শক্তি চট্টোপাধ্যায়</span>
       </div>
       <div class="bottom-area">
         <button class="btn-next" data-next="5">Next <i class="fas fa-arrow-right"></i></button>
@@ -417,10 +469,10 @@
 
     <!-- PAGE 5 -->
     <div class="page" data-page="5">
-      <div class="photo-frame"><img src="BOi porche.jpg"></div>
+      <div class="photo-frame"><img src="BOi porche.jpg" alt="Boi Porche"></div>
       <div class="poem-box">
-        <div class="poem-text" contenteditable="true">ঢতুমি যখন বইয়ের পাতায় মগ্ন হয়ে থাকো,চারপাশের এই ব্যস্ত শহর তখন স্তব্ধ হয়ে যায়।<br>চআমি বইয়ের পাতা নই, তবু তোমার ওই দু'চোখেরমনোযোগ পাওয়ার জন্য বড্ড ব্যাকুল হয়ে উঠি।</div>
-        <span class="poet-name"><i class="fas fa-feather-alt"></i> — সুনীল গঙ্গোপাধ্যায়</span>
+        <div class="poem-text" contenteditable="true">তুমি যখন বইয়ের পাতায় মগ্ন হয়ে থাকো,<br>চারপাশের এই ব্যস্ত শহর তখন স্তব্ধ হয়ে যায়।<br>আমি বইয়ের পাতা নই, তবু তোমার ওই দু'চোখের<br>মনোযোগ পাওয়ার জন্য বড্ড ব্যাকুল হয়ে উঠি।</div>
+        <span class="poet-name"><i class="fas fa-feather-alt"></i> — সুনীল গঙ্গোপাধ্যায়</span>
       </div>
       <div class="bottom-area">
         <button class="btn-next" data-next="6">Next <i class="fas fa-arrow-right"></i></button>
@@ -430,22 +482,22 @@
 
     <!-- PAGE 6 -->
     <div class="page" data-page="6">
-      <div class="photo-frame"><img src="GOLAP FUL.jpeg"></div>
+      <div class="photo-frame"><img src="GOLAP FUL.jpeg" alt="Golap Ful"></div>
       <div class="poem-box">
-        <div class="poem-text" contenteditable="true">ইয়ের পাতায় লুকিয়ে থাকে গোলাপের সেই ঘ্রাণ,তোমায় দেখলে জুড়িয়ে যায় আমার আকুল প্রাণ।<br>জ্ঞানের আলোয় মগ্ন তুমি, রূপের অনন্য এক মেলা,তোমার এই মায়াতেই কাটুক আমার সারাবেলা।</div>
-        <span class="poet-name"><i class="fas fa-feather-alt"></i> —  কবি শামসুর রহমান </span>
+        <div class="poem-text" contenteditable="true">পাতায় পাতায় লুকিয়ে থাকে গোলাপের সেই ঘ্রাণ,<br>তোমায় দেখলে জুড়িয়ে যায় আমার আকুল প্রাণ।<br>জ্ঞানের আলোয় মগ্ন তুমি, রূপের অনন্য এক মেলা,<br>তোমার এই মায়াতেই কাটুক আমার সারাবেলা।</div>
+        <span class="poet-name"><i class="fas fa-feather-alt"></i> — কবি শামসুর রহমান</span>
       </div>
       <div class="bottom-area">
         <button class="btn-next" data-next="7">Next <i class="fas fa-arrow-right"></i></button>
         <div class="footer"><i class="fas fa-heart"></i> Developed with Love by ABM MAHI <i class="fas fa-heart"></i></div>
       </div>
     </div>
-    
+
     <!-- PAGE 7 (FINAL) -->
-    <div class="page" data-page="8">
-      <div class="photo-frame"><img src="Chokh.jpeg"></div>
+    <div class="page" data-page="7">
+      <div class="photo-frame"><img src="Chokh.jpeg" alt="Chokh"></div>
       <div class="poem-box">
-        <div class="poem-text" contenteditable="true">শোনো কাজল চোখের মেয়ে<br>আমার দিবস কাটে, বিবশ হয়ে তোমার চোখে চেয়ে।</div>
+        <div class="poem-text" contenteditable="true">শোনো কাজল চোখের মেয়ে<br>আমার দিবস কাটে, বিবশ হয়ে তোমার চোখে চেয়ে।</div>
         <span class="poet-name"><i class="fas fa-feather-alt"></i> — সাদাত হোসাইন</span>
       </div>
       <div class="bottom-area">
@@ -469,7 +521,7 @@
         <span></span><span></span><span></span><span></span>
       </div>
       <h2>💞 ONLY FOR YOU 💞</h2>
-      <div class="popup-msg" id="popupMessage" contenteditable="true">Don't take it serius, take love & respect</div>
+      <div class="popup-msg" id="popupMessage" contenteditable="true">Don't take it serious, take love & respect</div>
       <button class="popup-close" id="closePopup">💖 I Don't Mind 💖</button>
     </div>
   </div>
@@ -485,7 +537,7 @@
       document.querySelectorAll('.btn-next[data-next]').forEach(btn => {
         btn.addEventListener('click', function(e) {
           const nextPage = parseInt(this.getAttribute('data-next'));
-          if (nextPage >= 1 && nextPage <= 8) {
+          if (nextPage >= 1 && nextPage <= 7) {
             pages.forEach(p => p.classList.remove('active'));
             const target = document.querySelector(`.page[data-page="${nextPage}"]`);
             if (target) {
@@ -521,9 +573,6 @@
       popup.addEventListener('click', function(e) {
         if (e.target === this) closePopup();
       });
-
-      // --- editable popup message (double-click or contenteditable already active) ---
-      // (it's already contenteditable="true", so user can edit directly)
 
       console.log('💖 Raisa Just For You website ready!');
       console.log('💡 EVERYTHING MADE WITH LOVE (click & type)');
